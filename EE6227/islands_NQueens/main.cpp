@@ -4,15 +4,16 @@
 #include <cstdlib>
 #include <vector>
 #include <iostream>
+#include <deque>
 #include <fstream>
 
 using namespace std;
 
 #define Max_Generation 100000
-#define Init_Num 100
+#define Init_Num 200
 #define Mutation_rate 0.001
 #define exchange_size 4
-#define exchange_period 30
+#define exchange_period 10000
 
 int random_generator(int range)
 {
@@ -122,6 +123,32 @@ Gene uni_crossover(Gene a, Gene b, double part,int n){
     }
     return child;
 }
+//Gene O1_crossover(Gene a, Gene b, int n){
+//    Gene child(n);
+//    int pos1 = random_generator(n);
+//    int pos2 = random_generator(n - pos1) + pos1;
+//    deque<int> order;
+//    for(int i = pos2 + 1; i < n; i++){
+//        bool is_exist = false;
+//        for(int j = pos1; j <= pos2; j++){
+//            if(b.config[i] == a.config[j]) is_exist = true;
+//        }
+//        if(is_exist) order.push_back(b.config[i]);
+//    }
+//    for(int i = 0; i < pos1; i++){
+//
+//    }
+//    for(int i = 0; i < n; i++){
+//        if(i >= pos1 && i<=pos2) {
+//            child.config[i] = a.config[i];
+//        }
+//        else{
+//
+//        }
+//    }
+//
+//    return child;
+//}
 void Pop::executor(){
     //Second step: Check penalty. If penalty == 0, find a solution. Otherwise, calculate fitness.
     //cout<<"Step2"<<endl;
@@ -149,19 +176,33 @@ void Pop::executor(){
     //Third step: Choose individuals according to fitness.
     //cout<<"Step3"<<endl;
     vector<Gene> pool;
+    //wheel selection
+//    for(int i = 0; i < Init_Num; i++){
+//        double prob = rand()*1.0/(RAND_MAX+1);
+//        if(prob < fitness[0]){
+//            pool.push_back(groups[0]);
+//        }
+//        else{
+//            for(vector<Gene>::size_type j = 1; j < Init_Num; j++){
+//                if(prob<fitness[j]&&prob>=fitness[j-1]){
+//                    pool.push_back(groups[j]);
+//                    break;
+//                }
+//            }
+//        }
+//    }
+    //Tournament Selection
     for(int i = 0; i < Init_Num; i++){
-        double prob = rand()*1.0/(RAND_MAX+1);
-        if(prob < fitness[0]){
-            pool.push_back(groups[0]);
-        }
-        else{
-            for(vector<Gene>::size_type j = 1; j < Init_Num; j++){
-                if(prob<fitness[j]&&prob>=fitness[j-1]){
-                    pool.push_back(groups[j]);
-                    break;
-                }
+        int min_penalty = 100000;
+        Gene temp(n);
+        for(int x = 0; x < 20; x ++) {
+            int idx = random_generator(Init_Num);
+            if (groups[idx].penalty < min_penalty) {
+                temp = groups[idx];
+                min_penalty = groups[idx].penalty;
             }
         }
+        pool.push_back(temp);
     }
     if(pool.size() != Init_Num) cout<<"Error found";
     //Forth step: Crossover.
@@ -190,12 +231,16 @@ int main(){
     cout<<"Please enter the number of queens: "<<endl;
     cin>>n;
     Pop pop1(n);
+    //string_config(pop1.groups[0].config);
     Pop pop2(n);
+    //string_config(pop2.groups[0].config);
     Pop pop3(n);
+    //string_config(pop3.groups[0].config);
     Pop pop4(n);
+    //string_config(pop4.groups[0].config);
     Pop islands[4] = {pop1,pop2,pop3,pop4};
     //1-2-3-4-1. So exchange happens in (1,2),(2,3),(3,4),(4,1)
-    int exchange[4][2] = {{1,2},{2,3},{3,4},{4,1}};
+    int exchange[4][2] = {{0,1},{1,2},{2,3},{3,0}};
     bool is_successful = false;
     for(int epoch = 0; epoch <= Max_Generation; epoch++){
         bool all_successful = true;
@@ -209,6 +254,7 @@ int main(){
         }
         //For exchange
         if(epoch%exchange_period == 1){
+            cout<<"Exchanging"<<endl;
             for(int i = 0; i < 4; i++){
                 Pop &ex1 = islands[exchange[i][0]];
                 Pop &ex2 = islands[exchange[i][1]];
@@ -250,4 +296,3 @@ int main(){
     for(int i = 0; i < 4; i ++) string_config(islands[i].solution.config);
     return 0;
 }
-

@@ -79,7 +79,7 @@ if __name__ == "__main__":
             train_pred.append(2)
     accu = accuracy_metric(train_y,train_pred)
     print("In training set, accuracy is ",accu)
-    print("Saving result in Decision_Tree_result.txt...")
+    print("Saving result in Fisher_LDA_result.txt...")
     # Output
     train_pred=[]
     for x in test_x:
@@ -91,4 +91,4 @@ if __name__ == "__main__":
             train_pred.append(1)
         else:
             train_pred.append(2)
-    np.savetxt("Decision_Tree_result.txt",np.array(train_pred))
+    np.savetxt("Fisher_LDA_result.txt",np.array(train_pred))

@@ -1,4 +1,4 @@
-###Description
+### Description
 This project aims at solving N-Queens problem using genetic algorithm. This ReadMe file gives you an instruction on how to run and modify the parameters of my code.
 ###Implementation Details
 In implementation, I use Uniform Crossover and Uniform Mutation. The mutation rate is set to be 0.001 and crossover always happens. The default initial group size is 400 and default max generation is 100000. You can modify these parameters according to the following instruction.
@@ -12,6 +12,6 @@ If you are under **Linux (WSL)** environment, you should get ```NQueensGA```. Yo
 
 After starting my program, it will ask for the number of Queens. Enter the problem size and wait for several minutes (it depends on the problem size and your computer performance). Don't worry, it will stop after 100000 generations automatically if it doesn't find a solution.
 
-###Modify and output
+### Modify and output
 If you want to change my default parameters, open ```NQueensGA.cpp```. In the beginning of this file, you should see three ```#define```. You can modify the number at the end of these lines to what you want.<br>
 If this project finds a solution, it will print it on the screen and output it into a "solution.txt" file, according to the requirement.

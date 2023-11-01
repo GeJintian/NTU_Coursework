@@ -1,7 +1,7 @@
 ### Description
 This project aims at solving N-Queens problem using 4-island GA. This ReadMe file gives you an instruction on how to run and modify the parameters of my code.
-###Implementation Details
-In implementation, I use Uniform Crossover and Uniform Mutation. I have tried to use Order1 crossover and single swap mutation, but they perform worser than uniform operation. The mutation rate is set to be 0.001 and crossover always happens. The default initial group size is 200 and default max generation is 100000. You can modify these parameters according to the following instruction.
+### Implementation Details
+In implementation, I use Uniform Crossover and Uniform Mutation. I have tried to use Order1 crossover and single swap mutation, but they perform worser than uniform operation. The mutation rate is set to be 0.001 and crossover always happens. The default initial group size is 200 and default max generation is 100000. You can modify these parameters according to the following instructions.
 ### How to run
 This project is implemented by C++. Therefore, I have provided both the source code and a runnable file.<br>
 - For source code, you should have seen one file: ```main.cpp```. To compile my source code, run in the command line:<br>

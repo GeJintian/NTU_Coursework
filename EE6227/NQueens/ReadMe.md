@@ -1,8 +1,8 @@
 ### Description
 This project aims at solving N-Queens problem using genetic algorithm. This ReadMe file gives you an instruction on how to run and modify the parameters of my code.
-###Implementation Details
+### Implementation Details
 In implementation, I use Uniform Crossover and Uniform Mutation. The mutation rate is set to be 0.001 and crossover always happens. The default initial group size is 400 and default max generation is 100000. You can modify these parameters according to the following instruction.
-###How to run
+### How to run
 This project is implemented by C++. Therefore, I have provided both the source code and a runnable file.<br>
 - For source code, you should have seen one file: ```NQueensGA.cpp```. To compile my source code, run in the command line:<br>
 ```g++ -o NQueensGA NQueensGA.cpp```<br>If you are under **Windows** environment, you should get ```NQueensGA.exe```. You can run it by simply double click on this file.<br>
